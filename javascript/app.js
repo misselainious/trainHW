@@ -3,13 +3,13 @@ var config = {
     authDomain: "train-a6477.firebaseapp.com",
     databaseURL: "https://train-a6477.firebaseio.com",
     projectId: "train-a6477",
-    storageBucket: "",
+    storageBucket: "train-a6477.appspot.com",
     messagingSenderId: "734109848774"
   };
   
   firebase.initializeApp(config);
   
-  var database = firebase.database();
+  var db = firebase.database();
   
   var name = "";
   var destination = "";
@@ -32,12 +32,12 @@ var config = {
         frequency: frequency,
         away: away
     };
-  
+
     // var formatstartDate = moment(startDate).format('MM/DD/YYYY');
     // var today = moment().format('MM/DD/YYYY');
 
   
-    database.ref().push(newTrain);
+    db.ref().push(newTrain);
 
     console.log(newTrain.name);
     console.log(newTrain.destination);
