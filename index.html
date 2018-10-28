@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Time Sheet</title>
+    <link rel="stylesheet" href="../trainHW/css/reset.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../trainHW/css/style.css">
+</head>
+<body>
+        
+    <div class= "container">
+            <iframe src="https://giphy.com/embed/9AJ8pivyrFCDcrwVWZ" width="580" height="96" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/9AJ8pivyrFCDcrwVWZ"></a></p>
+            <table class="table">
+                    <thead>
+                      <tr>
+                        <th id="name" scope="col">Train Name</th>
+                        <th id="destination" scope="col">Destination</th>
+                        <th id="frequency" scope="col">Frequency (min)</th>
+                        <th id="arrival">Next Arrival</th>
+                        <th id="away" scope="col">Minutes Away</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Night Train</td>
+                        <td>Venice, Italy</td>
+                        <td>03:45</td>
+                        <td>60</td>
+                      </tr>
+    
+                    </tbody>
+                  </table>
+
+
+    <form>
+        <h1>Add Train</h1>
+        <div class="form-group">
+          <label for="trainName">Train Name</label>
+          <input id="trainname" type="text" class="form-control" id="trainName" aria-describedby="name" placeholder="Train Name">
+        </div>
+
+        <div class="form-group">
+            <label for="destination">Destination</label>
+            <input id="destinationtext" type="text" class="form-control" id="destination" aria-describedby="emailHelp" placeholder="Destination">
+          </div>
+
+          <div class="form-group">
+            <label for="firstTime">First Train Time (HH:mm - military time)</label>
+            <input id="firsttext" type="text" class="form-control" id="firstTime" aria-describedby="emailHelp" placeholder="First Departure">
+        </div>
+         
+          <div class="form-group">
+            <label for="frequency">Frequency</label>
+            <input id="freqtext" type="text" class="form-control" id="frequency" aria-describedby="emailHelp" placeholder="Frequency">
+          </div>
+
+          <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+
+    </div>  <!--End container-->
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="../trainHW/javascript/app.js"></script>
+    
+
+</body>
+</html>
