@@ -1,3 +1,6 @@
+//Audio for train noise
+var audio = document.createElement('audio');
+    audio.setAttribute('src', 'https://www.soundjay.com/transportation/sounds/cable-car-pass-by-01.mp3');
 
 //sets up firebase
 var config = {
@@ -13,7 +16,9 @@ var config = {
   //variable for database so I don't have to type it every time.
   var db = firebase.database();
   
-//   var audio = new Audio('honk.mp3');
+
+  var timeNow = moment().format('HH:mm');
+  $("#currentTime").text("Current Time: "+ timeNow);
 
 //variables
   var name = "";
@@ -22,8 +27,8 @@ var config = {
   var away = "";
   
   $("#submit").on("click", function(event) {
-    
     event.preventDefault();
+    audio.play();
     //grabs info from form
     name = $('#trainname').val();
     destination = $('#destinationtext').val();
@@ -52,7 +57,7 @@ $("#trainname").val("");
 $("#destinationtext").val("");
 $("#firsttext").val("");
 $("#freqtext").val("");
-//   audio.play();
+
   });
   
 
@@ -64,7 +69,9 @@ $("#freqtext").val("");
     var trDest = childSnapshot.val().destination;
     var trFreq = childSnapshot.val().frequency;
     var trFirst = childSnapshot.val().first;
-    var formatted = "hh:mm";
+    // var formatted = "hh:mm";
+    // var convertTime = moment(trFirst, formatted);
+    // console.log("convertTime:", convertTime.i);
   
     // Train Info
     console.log(trName);
@@ -73,12 +80,18 @@ $("#freqtext").val("");
     console.log(trFirst);
 
     //Gets current time and diplays in HTML
-    var timeNow = moment().format('LT');
-    $("#currentTime").text(timeNow);
-var firstMil = moment(trFirst, formatted);
+
+var firstMil = moment(trFirst, 'HH:mm').format('HH:mm');
 console.log("FirstMil", firstMil);
-var diff = trFirst.diff(timeNow, 'minutes');
-console.log(diff);
+
+console.log(moment(trFirst).fromNow());
+
+// var minutes = (firstMil - timeNow);
+// console.log(minutes);
+
+// var diff = timeNow.from(firstMil);
+// var diff = trFirst.diff(moment(), 'minutes');
+// console.log("diff: "+ diff);
       
 //make new row and add train info to table
     var newRow = $("<tr>").append(
