@@ -16,7 +16,7 @@ var config = {
   //variable for database so I don't have to type it every time.
   var db = firebase.database();
   
-
+    //Gets current time and diplays in HTML
   var timeNow = moment().format('HH:mm');
   $("#currentTime").text("Current Time: "+ timeNow);
 
@@ -79,26 +79,40 @@ $("#freqtext").val("");
     console.log(trFreq);
     console.log(trFirst);
 
-    //Gets current time and diplays in HTML
+   
 
-var firstMil = moment(trFirst, 'HH:mm').format('HH:mm');
-console.log("FirstMil", firstMil);
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(trFirst, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
 
-console.log(moment(trFirst).fromNow());
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-// var minutes = (firstMil - timeNow);
-// console.log(minutes);
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
 
-// var diff = timeNow.from(firstMil);
-// var diff = trFirst.diff(moment(), 'minutes');
-// console.log("diff: "+ diff);
+    // Time apart (remainder)
+    var tRemainder = diffTime % trFreq;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = trFreq - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var due = moment(nextTrain).format("hh:mm");
       
 //make new row and add train info to table
     var newRow = $("<tr>").append(
         $("<td>").text(trName),
         $("<td>").text(trDest),
         $("<td>").text(trFreq),
-        $("<td>").text(trFirst)
+        $("<td>").text(trFirst),
+        $("<td>").text(due),
+        $("<td>").text(tMinutesTillTrain)
     );
       $(".table").append(newRow);
 
