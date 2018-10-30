@@ -1,7 +1,3 @@
-//Audio for train noise
-var audio = document.createElement('audio');
-    audio.setAttribute('src', 'https://www.soundjay.com/transportation/sounds/cable-car-pass-by-01.mp3');
-
 //sets up firebase
 var config = {
     apiKey: "AIzaSyCbAq9jE9Yi2x9G6mQn3ffdyuPn8wxPGFk",
@@ -13,6 +9,67 @@ var config = {
   };
   
   firebase.initializeApp(config);
+
+
+// var provider = new firebase.auth.GoogleAuthProvider();
+
+// firebase.auth().signInWithPopup(provider).then(function(result) {
+//     // This gives you a Google Access Token. You can use it to access the Google API.
+//     var token = result.credential.accessToken;
+//     // The signed-in user info.
+//     var user = result.user;
+//     // ...
+//   }).catch(function(error) {
+//     // Handle Errors here.
+//     var errorCode = error.code;
+//     var errorMessage = error.message;
+//     // The email of the user's account used.
+//     var email = error.email;
+//     // The firebase.auth.AuthCredential type that was used.
+//     var credential = error.credential;
+//     // ...
+//   });
+
+//will work whenever the auth state is changed
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      $("#login-div").hide();
+      $("#user-div").show();
+      var user = firebase.auth().currentUser;
+      if(user != null){
+          var email_id = user.email;
+          $("#userPara").text("Welcome, " + email_id);
+      }
+    } else {
+      // No user is signed in.
+      $("#login-div").show();
+      $("#user-div").hide();
+    }
+  });
+
+  function login(){
+      var userEmail = $("#email_field").val();
+      var userPass = $("#password_field").val();
+
+      firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        window.alert("Error: ", errorMessage);
+        // ...
+      });
+  }
+
+  function logout(){
+    firebase.auth().signOut();
+  }
+//Audio for train noise
+var audio = document.createElement('audio');
+    audio.setAttribute('src', 'https://www.soundjay.com/transportation/sounds/cable-car-pass-by-01.mp3');
+
+
   //variable for database so I don't have to type it every time.
   var db = firebase.database();
   
