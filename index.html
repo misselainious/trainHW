@@ -5,99 +5,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+    
     <title>Train Schedule</title>
-    <link rel="stylesheet" href="../trainHW/css/reset.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <meta name="google-signin-client_id" content="734109848774-tsque58fdjnv4p77heojd0manib30k1p.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="../trainHW/css/reset.css" />
     <link rel="stylesheet" href="../trainHW/css/style.css">
+    <link rel="html" href="schedule.html">
 </head>
 
 <body>
-<div id="login-div" class="main-div">
+
+    <!-- Google Sign-In -->
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <a href="#" onclick="signOut();">Sign out</a>
+    <!-- Form to Log In
+    <form>
+<div id="login-div" class="main-div form-group col-4">
     <h3>Firebase web login</h3>
-    <input type="email" id="email_field">
-    <input type="password" id="password_field">
+    <input type="email" id="email_field" class="form-control" placeholder="Enter email">
+    <input type="password" id="password_field" class="form-control" placeholder="Enter Password">
     <button onclick="login()">Log-In</button>
 </div>
+</form> -->
 
-<div id="user-div" class="logged-in-div">
-    <h3>Welcome!</h3>
-    <p id="userPara">Wecome, you're currently logged in</p>
-    <button onclick="logout()" class = "">Log-Out</button>
-</div>
-
-    <div class="container">
-        <!-- Header with GIF and current time -->
-        <div class="header">
-            <iframe src="https://giphy.com/embed/9AJ8pivyrFCDcrwVWZ" width="580" height="96" frameBorder="0" class="giphy-embed"
-                allowFullScreen></iframe>
-            <p><a href="https://giphy.com/gifs/9AJ8pivyrFCDcrwVWZ"></a></p>
-            <div id="currentTime" class="p-2"> </div>
+<!-- Form to Log Out -->
+<form>
+        <div id="user-div" class="logged-in-div form-group">
+            <h3>Welcome!</h3>
+            <p id="userPara">Wecome, you're currently logged in</p>
+            <button onclick="logout()" class = "">Log-Out</button>
         </div>
-
-        <!-- Schedule Table -->
-        <h3 class="row m-0">Train Schedule</h3>
-        <table class="table">
-
-            <thead>
-                <tr>
-                    <th id="name" scope="col">Train Name</th>
-                    <th id="destination" scope="col">Destination</th>
-                    <th id="frequency" scope="col">Frequency (min)</th>
-                    <th id="arrival">First Departure</th>
-                    <th id="next">Next Departure</th>
-                    <th id="away" scope="col">Minutes Away</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-
-                    <td scope="col">Night Train</td>
-                    <td scope="col">Venice, Italy</td>
-                    <td scope="col">60</td>
-                    <td scope="col">5:45</td>
-                    <td scope="col">6:45</td>
-                    <td scope="col">20</td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        <!-- Form to add train -->
-        <form>
-            <h3>Add Train</h3>
-            <div class="form-group">
-                <label for="trainName">Train Name</label>
-                <input id="trainname" type="text" class="form-control" id="trainName" aria-describedby="name"
-                    placeholder="Train Name">
-            </div>
-
-            <div class="form-group">
-                <label for="destination">Destination</label>
-                <input id="destinationtext" type="text" class="form-control" id="destination" aria-describedby="emailHelp"
-                    placeholder="Destination">
-            </div>
-
-            <div class="form-group">
-                <label for="firstTime">First Train Time (hh:mm - military time)</label>
-                <input id="firsttext" type="text" class="form-control" id="firstTime" aria-describedby="emailHelp"
-                    placeholder="First Departure">
-            </div>
-
-            <div class="form-group">
-                <label for="frequency">Frequency</label>
-                <input id="freqtext" type="text" class="form-control" id="frequency" aria-describedby="emailHelp"
-                    placeholder="Frequency">
-            </div>
-
-            <button id="submit" class="btn btn-info" type="submit"> Submit</button>
-
         </form>
+        
+            <div class="container">
+                <!-- Header with GIF and current time -->
+                <div class="header">
+                    <iframe src="https://giphy.com/embed/9AJ8pivyrFCDcrwVWZ" width="580" height="96" frameBorder="0" class="giphy-embed"
+                        allowFullScreen></iframe>
+                    <p><a href="https://giphy.com/gifs/9AJ8pivyrFCDcrwVWZ"></a></p>
+                    <div id="currentTime" class="p-2"> </div>
+                </div>
+        
+                <!-- Schedule Table -->
+                <h3 class="row m-0">Train Schedule</h3>
+                <table class="table">
+        
+                    <thead>
+                        <tr>
+                            <th id="name" scope="col">Train Name</th>
+                            <th id="destination" scope="col">Destination</th>
+                            <th id="frequency" scope="col">Frequency (min)</th>
+                            <th id="arrival">First Departure</th>
+                            <th id="next">Next Departure</th>
+                            <th id="away" scope="col">Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+        
+                            <td scope="col">Night Train</td>
+                            <td scope="col">Venice, Italy</td>
+                            <td scope="col">60</td>
+                            <td scope="col">5:45</td>
+                            <td scope="col">6:45</td>
+                            <td scope="col">20</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+        
+                <!-- Form to add train -->
+                <form>
+                    <h3>Add Train</h3>
+                    <div class="form-group">
+                        <label for="trainName">Train Name</label>
+                        <input id="trainname" type="text" class="form-control" id="trainName" aria-describedby="name"
+                            placeholder="Train Name">
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input id="destinationtext" type="text" class="form-control" id="destination" aria-describedby="emailHelp"
+                            placeholder="Destination">
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="firstTime">First Train Time (hh:mm - military time)</label>
+                        <input id="firsttext" type="text" class="form-control" id="firstTime" aria-describedby="emailHelp"
+                            placeholder="First Departure">
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="frequency">Frequency</label>
+                        <input id="freqtext" type="text" class="form-control" id="frequency" aria-describedby="emailHelp"
+                            placeholder="Frequency">
+                    </div>
+        
+                    <button id="submit" class="btn btn-info" type="submit"> Submit</button>
+        
+                </form>
+        
+            </div>
+            <!--End container-->
+   
 
-    </div>
-    <!--End container-->
-    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="../trainHW/javascript/app.js"></script>
 
