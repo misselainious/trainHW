@@ -14,3 +14,13 @@
 .logged-in-div{
     display: none;
 }
+thead{
+    background-color: rgba(241, 241, 149, 0.678);
+}
+tbody{
+    background-color: rgba(241, 241, 149, 0.411);
+}
+h6{
+    font-size: 15px;
+    padding: 20px;
+}

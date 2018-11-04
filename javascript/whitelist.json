@@ -1,0 +1,4 @@
+{"web":{"client_id":"734109848774-dn37v3737njn82f2bl33tle7goqb7u5h.apps.googleusercontent.com","project_id":"train-a6477","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://www.googleapis.com/oauth2/v3/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"buVTRDl3wZBipZJL0O-uFB8G","redirect_uris":["https://train-a6477.firebaseapp.com/__/auth/handler"],"javascript_origins":["http://localhost","http://localhost:5000","https://train-a6477.firebaseapp.com"]},
+"web":{"content_security_policy": "https://apis.google.com"}
+}
+
